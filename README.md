@@ -1,187 +1,179 @@
-# 📊 Customer Churn Analysis & Customer Intelligence
+# 📊 Churn Analysis & Customer Intelligence
 
-**An end-to-end data analytics project using Python, SQL, Pandas, and SQLite to investigate customer churn, subscription performance, and revenue impact.**
+**An end-to-end customer churn analytics project using Python, SQL, Pandas, SQLite, NumPy, Matplotlib, and Seaborn.**
 
----
+## 📌 Project Overview
 
-## 📌 1. Business Problem
+Customer churn analysis helps businesses understand who leaves, why they leave, and when they are most likely to leave. This project analyses an OTT subscription dataset by combining customer demographics, subscription information, and customer-support data.
 
-Customer churn occurs when customers stop using a company's products or services. For a subscription business, high churn can reduce recurring revenue and increase the cost of acquiring replacement customers.
+### Business Questions
 
-The objective of this project is to analyse customer, subscription, and customer-support data to understand:
+- **Who:** Which customers have churned or may be at risk?
+- **Why:** What customer, subscription, or support patterns are associated with churn?
+- **When:** During which periods is churn most pronounced?
 
-- **Who** is churning?
-- **Why** might customers be leaving?
-- **When** is churn occurring?
-- **Which** customer segments require further investigation?
-- **How** can the business improve retention?
+## 🛠️ Tech Stack
 
-## 🛠️ 2. Tech Stack
+- **Python:** Data analysis and feature engineering
+- **Pandas & NumPy:** Data cleaning, transformation, and aggregation
+- **SQLite & SQL:** Relational data storage and extraction
+- **Matplotlib & Seaborn:** Data visualisation
+- **Jupyter Notebook:** Interactive analysis
 
-| Technology | Application |
+## 🗄️ Database Structure
+
+The project uses three relational tables in the `customer_churn` database.
+
+| Table | Example Fields |
 |---|---|
-| Python | Data analysis and transformation |
-| Pandas | Data cleaning, grouping, and aggregation |
-| NumPy | Numerical operations and feature engineering |
-| SQLite | Relational data storage and extraction |
-| SQL | Data retrieval and business analysis |
-| Matplotlib & Seaborn | Data visualisation |
-| Jupyter Notebook | Analysis and documentation |
+| `db_customer` | Customer ID, name, country, state, gender, date of birth, interests, pincode |
+| `db_subscription` | Customer ID, subscription start date, renewal date, subscription type, plan type, contract type, cancellation date, cancellation reason, monthly charges, CLTV, churn score |
+| `db_support` | Customer ID, complaint date, escalations, CSAT score, comments |
 
-## 📈 3. Executive KPI Dashboard
+## 📈 Key Performance Indicators (KPIs)
 
-*The following figures are reported in the project reference report. They should be rechecked against the final notebook before being treated as verified results.*
+The following metrics and figures are reported in the project reference report.
 
-| KPI | Reported Value | Business Meaning |
-|---|---:|---|
-| Overall Churn Rate | 28.6% | Share of customers who churned |
-| Retention Rate | 71.4% | Share of customers retained |
-| Monthly Contract Churn | 55.6% | Churn rate among monthly subscribers |
-| Annual Contract Churn | 8.3% | Churn rate among annual subscribers |
-| Average Customer Tenure | 1,451 days | Reported average customer lifetime in days |
-| ARPU | ₹18.8 | Reported average revenue per user |
-| Revenue Loss | 74 | Reported amount; currency and calculation basis require validation |
-| CLTV Lost | 2,047 | Reported customer lifetime value lost |
-| Revenue Loss Percentage | 18% | Reported revenue loss as a share of revenue |
+| KPI | Reported Value |
+|---|---:|
+| Overall Churn Rate | 28.6% |
+| Retention Rate | 71.4% |
+| Monthly Contract Churn | 55.6% |
+| Annual Contract Churn | 8.3% |
+| Average Customer Tenure | 1,451 days |
+| ARPU | ₹18.8 |
+| Total Revenue | 395 |
+| Revenue Loss Due to Churn | 74 |
+| CLTV Lost | 2,047 |
+| Revenue Loss Percentage | 18% |
 
-> **Data validation note:** Confirm the currency, units, customer counts, and revenue definitions before publishing these KPIs. Revenue at risk, revenue already lost, and customer lifetime value lost are different metrics.
+**Note:** The report does not consistently specify the units and currency for all revenue figures. These values should be validated against the final dataset before being presented as verified results.
 
-## 🔍 4. Key Business Insights
+## 🔍 Key Insights
 
-### Insight 1 — Overall customer churn
+### 1. Customer Churn and Retention
 
-The reference report records a churn rate of **28.6%** and a retention rate of **71.4%**.
+The report records an overall churn rate of **28.6%** and a retention rate of **71.4%**.
 
-**Business interpretation:** Churn should be monitored alongside retention, recurring revenue, and customer lifetime value to understand the overall health of the subscription business.
+**Business implication:** Customer retention is an important area for further investigation, especially among segments with higher churn.
 
-**Recommended action:** Establish a consistent monthly churn report and compare results across customer segments.
+### 2. Monthly vs. Annual Contracts
 
-### Insight 2 — Monthly versus annual contracts
-
-| Contract Type | Reported Churn Rate |
+| Contract Type | Churn Rate |
 |---|---:|
 | Monthly | 55.6% |
 | Annual | 8.3% |
 
-The reported monthly-contract churn rate is approximately **6.7 times** the annual-contract churn rate.
+The report identifies a substantial difference between monthly and annual contract churn. The reported monthly churn rate is approximately 6.7 times the annual rate.
 
-**Business interpretation:** Contract duration may be associated with differences in customer retention. However, the figures alone do not establish that contract type causes churn.
+**Business implication:** Investigate differences in commitment periods, pricing, subscription benefits, and customer experience. The comparison alone does not establish causation.
 
-**Recommended action:** Investigate cancellation timing, pricing, plan benefits, and customer satisfaction across both contract groups. Test suitable retention offers for eligible monthly subscribers.
+### 3. Subscription Plan
 
-### Insight 3 — Subscription plan performance
+The report identifies the Basic subscription plan as contributing the most churn.
 
-The reference report identifies the Basic subscription plan as contributing the most churn.
+**Business implication:** Compare the number of churned customers, the churn rate, and the revenue impact across Basic, Standard, and Premium plans before deciding which segment needs the most attention.
 
-**Business interpretation:** A high number of churned customers does not necessarily mean the plan has the highest churn rate or the greatest financial impact.
+### 4. Geographic and Monthly Patterns
 
-**Recommended action:** Compare churn rate, number of churned customers, monthly recurring revenue lost, and customer lifetime value across Basic, Standard, and Premium plans.
+The report identifies **Karnataka** as the most affected state and **September 2024** as the month with the most churn.
 
-### Insight 4 — Geographic churn patterns
+**Business implication:** Investigate possible pricing changes, technical issues, customer complaints, and cancellation reasons during the affected period.
 
-The reference report identifies Karnataka as the most affected state and September 2024 as the month with the most churn.
+### 5. Revenue and Customer Lifetime Value
 
-**Business interpretation:** These are areas for investigation, not proof of a particular cause.
+The report lists revenue loss of 74, CLTV lost of 2,047, and revenue loss of 18%.
 
-**Recommended action:** Review cancellation reasons, support escalations, pricing changes, and subscription activity during the affected period. Compare Karnataka with other states and September with surrounding months.
+**Business implication:** Evaluate churn using both customer counts and financial impact. Confirm the units and calculation methods before interpreting these amounts as actual losses.
 
-### Insight 5 — Revenue and customer value
+## 🧮 KPI Calculation Methods
 
-The reference report lists revenue loss of 74, CLTV lost of 2,047, and revenue loss of 18%.
-
-**Business interpretation:** Financial impact should be measured separately from customer count. Losing a small number of high-value customers can have a different impact from losing many low-value customers.
-
-**Recommended action:** Prioritise customer segments using validated recurring revenue, customer lifetime value, churn status, and support history.
-
-## 📊 5. KPIs Analysed
-
-| KPI | Calculation |
+| Metric | Formula |
 |---|---|
-| Churn Rate | Churned customers ÷ total eligible customers × 100 |
-| Retention Rate | Retained customers ÷ total eligible customers × 100 |
-| Churn by Plan | Churn rate calculated separately for each plan |
-| Churn by State | Churn rate calculated separately for each state |
-| ARPU | Revenue for the defined period ÷ eligible customers for that period |
-| Average Tenure | Average time between subscription start and cancellation or the defined reporting date |
-| Revenue at Risk | Defined recurring revenue associated with customers classified as high risk |
-| Average Complaints per Customer | Complaint count ÷ distinct customers |
-| Escalation Rate | Escalated support cases ÷ total eligible support cases × 100 |
-| Churn by Contract Type | Churn rate calculated separately for each contract type |
+| Churn Rate | Churned customers / Total customers × 100 |
+| Retention Rate | 100% − Churn Rate |
+| Churn by Plan | Calculate churn rate grouped by plan type |
+| Churn by State | Calculate churn rate grouped by country and state |
+| ARPU | Revenue for the defined period / Eligible active customers |
+| Average Customer Tenure | Average time between subscription start and cancellation or the reporting date |
+| Revenue at Risk | Monthly charges associated with customers whose churn score exceeds 70 |
+| Escalation Rate | Escalated support cases / Total eligible support cases × 100 |
+| Average Complaints per Customer | Total complaints / Distinct customers |
+| Escalation and Churn Comparison | Compare churn rates for customers with and without escalations |
 
-*Metric definitions must use consistent reporting periods, denominators, and customer-level aggregation.*
+*Calculation definitions should be aligned with the available columns and the reporting period used in the notebook.*
 
-## 🧹 6. Data Analysis Workflow
+## 💡 Recommended Business Actions
 
-1. **Database connection:** Connect Python to the SQLite database.
-2. **Data extraction:** Load customer, subscription, and support tables.
-3. **Data cleaning:** Inspect missing values, duplicates, column names, and data types.
-4. **Feature engineering:** Prepare analysis fields such as tenure, churn status, and customer segments where supported by the source data.
-5. **Exploratory data analysis:** Use grouping, aggregations, and pivot tables to examine patterns.
-6. **KPI calculation:** Calculate churn, retention, revenue, tenure, and support metrics.
-7. **Visualisation:** Use charts to compare customer segments and identify patterns.
-8. **Business recommendations:** Translate validated findings into actions that can be investigated or tested.
+1. **Investigate Karnataka:** Review customer complaints, technical issues, pricing changes, and cancellation reasons.
+2. **Review the Basic plan:** Check whether changes to subscription pricing or benefits could be associated with the September 2024 churn pattern.
+3. **Study competitor switching:** Investigate recorded cancellation reasons and customer feedback.
+4. **Prioritise at-risk customers:** Review medium- and high-risk customers, their lifetime value, and their support history.
+5. **Improve customer support:** Examine complaint trends, escalations, and customer satisfaction alongside churn.
+6. **Monitor financial impact:** Track recurring revenue, churn, retention, and customer lifetime value consistently.
 
-## 💡 7. Business Recommendations
+These are recommended investigations based on the report's findings, not confirmed explanations for churn.
 
-- Investigate why monthly-contract customers have a higher reported churn rate.
-- Review the Basic plan's churn rate and financial contribution before changing pricing or benefits.
-- Examine the September 2024 churn peak and investigate possible contributing factors.
-- Analyse support complaints, escalations, and satisfaction scores alongside churn.
-- Prioritise retention outreach using validated customer risk and value measures.
-- Track churn rate, retention rate, recurring revenue, and customer lifetime value consistently.
+## 🔄 Project Workflow
 
-These recommendations are proposed actions based on the reported patterns; their effectiveness would need to be tested.
+1. Connect Python to SQLite.
+2. Extract customer, subscription, and support data.
+3. Clean data and handle missing values.
+4. Perform feature engineering and create analytical fields.
+5. Conduct exploratory data analysis using aggregations, grouping, and pivot tables.
+6. Calculate churn, retention, tenure, revenue, and support KPIs.
+7. Create visualisations using Matplotlib and Seaborn.
+8. Summarise findings and develop business recommendations.
 
-## 📂 8. Project Files
+## 🚀 Portfolio Project Summary
 
-| File | Description |
-|---|---|
-| `Untitled.ipynb` | Jupyter Notebook containing the analysis |
-| `customer_churn.db` | SQLite database used in the project |
-| `exported_churn_data.csv` | Exported dataset, if permitted for public sharing |
-| `README.md` | Project documentation and business findings |
+### Churn & Revenue Impact
 
-## ▶️ 9. How to Run the Project
+Analysed an OTT subscription dataset by integrating customer and subscription information to investigate churn patterns, contract performance, and revenue impact.
 
-### Requirements
+The reference report identifies a 28.6% overall churn rate and a difference between monthly-contract churn (55.6%) and annual-contract churn (8.3%).
 
-Install Python and Jupyter Notebook. Depending on the imports used in the notebook, install the required libraries:
+### Risk Scoring & Segmentation
+
+Examined customer churn-risk scores, subscription characteristics, tenure, and support-related information to identify customer groups for further investigation and potential retention outreach.
+
+### Support Intelligence & Cancellation Analysis
+
+The reference report also describes support-escalation and cancellation analysis as ongoing work. Treat these findings as work in progress unless the analysis has been completed and verified in the notebook.
+
+## 📂 Project Files
+
+- `customer_churn_data_raw.xlsx` — Original Excel dataset.
+- `exported_churn_data.csv` — Exported customer churn data.
+- `customer_churn.db` — SQLite database.
+- `Untitled.ipynb` — Jupyter Notebook containing the analysis.
+- `README.md` — Project documentation, KPIs, and business findings.
+
+## ▶️ How to Run
+
+Install the libraries required by the notebook:
 
 ```bash
 pip install pandas numpy matplotlib seaborn jupyter
 ```
 
-### Run the analysis
-
-1. Clone or download this repository.
-2. Open a terminal in the project directory.
-3. Start Jupyter Notebook:
-
-```bash
-jupyter notebook
-```
-
+1. Clone or download the repository.
+2. Open a terminal in the project folder.
+3. Run `jupyter notebook`.
 4. Open `Untitled.ipynb`.
-5. Verify the database and CSV paths.
-6. Run the notebook cells in order.
+5. Check the database and dataset paths.
+6. Execute the notebook cells in order.
 
-## ⚠️ 10. Data Limitations
+## ⚠️ Data Limitations
 
-- KPI figures in this README are taken from the project reference report and have not been independently recalculated here.
-- Revenue figures require a confirmed currency, reporting period, and calculation definition.
-- Customer-support tables may contain multiple records per customer; joins must avoid inflating customer counts.
-- Correlation between support activity and churn does not prove causation.
-- Risk scores should not be interpreted as confirmed future churn unless their predictive performance has been evaluated.
-
-## 🚀 11. Future Enhancements
-
-- Develop an interactive Power BI dashboard.
-- Add reusable SQL queries for key business metrics.
-- Create customer cohorts based on subscription start dates.
-- Compare churn and recurring revenue across plans and contract types.
-- Validate risk segmentation against actual churn outcomes.
-- Add charts and verified KPI outputs to this repository.
+- KPI values are taken from the project reference report and require validation against the final notebook.
+- Revenue figures require confirmed units, currency, and calculation definitions.
+- Multiple support records for one customer can inflate counts if joins are not handled correctly.
+- Associations between support activity and churn do not prove causation.
+- Churn-risk scores should not be described as a validated predictive model unless their predictive performance has been evaluated.
 
 ## 👩‍💻 Author
 
 **Kushala B R**
+
+*For educational and portfolio purposes. Ensure that all publicly shared datasets are authorised for redistribution and do not expose private or confidential customer information.*
